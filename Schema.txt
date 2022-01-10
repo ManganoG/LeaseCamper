@@ -1,0 +1,72 @@
+1) Autentificazione dell'utente
+end-point /login POST
+input 	user:string
+		pass:string
+output	{"usr":string}
+		SESSION {
+			status:string{"loggato"};
+			nome_utente:string}
+			
+2) Iscrizione dell'utente
+end-point /singIn POST
+input 	name:string
+		user:string
+		pass:string
+		numeroTelefono:int 
+output	{"usr":string}
+		SESSION {
+			status:string{"loggato"};
+			nome_utente:string}
+
+
+3)richiesta di noleggiare un camper
+end-point /lease POST
+input	SESSION{nome_utente:string,user:string}
+		metodo di pagamento:string
+		nome_camper:string
+		targa:string
+output	{
+			propriatario:string
+			risposta:string
+		}
+
+4)inserire un camper sulla piattaforma
+end-point /rent POST
+input	SESSION{nome_utente:string,user:string}
+		nome_camper:string
+		targa:string
+		descrizione:string
+output	{
+			propriatario:string
+		}
+
+5)Mostra i tuoi noleggi
+
+end-point /viewLease POST
+input	SESSION{nome_utente:string,user:string}
+		
+output	{
+			{nome_camper:string;targa:string;stato:string;metodo di pagamento:string}
+		}
+		
+
+5)Mostra i tuoi camper
+
+end-point /viewRent POST
+input	SESSION{nome_utente:string,user:string}
+		
+output	{
+			{nome_camper:string;targa:string;stato:string}
+		}
+		
+		
+6)Mostra tutti i camper
+
+end-point /viewCamper POST
+
+input
+output	{
+			{nome_camper:string;targa:string;stato:string;propriatario:string}
+		}
+
+7)
