@@ -70,7 +70,7 @@ output	{
 		}
 
 7)Mosta tutti i noleggiatori
-end-point /viewCamper POST
+end-point /viewNolegg POST
 
 input
 output	{
