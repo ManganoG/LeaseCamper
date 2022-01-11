@@ -69,4 +69,10 @@ output	{
 			{nome_camper:string;targa:string;stato:string;propriatario:string}
 		}
 
-7)
+7)Mosta tutti i noleggiatori
+end-point /viewCamper POST
+
+input
+output	{
+			{nome_noleggiatore:string;{nome_camper:string;targa:string;stato:string}}
+		}
