@@ -1,22 +1,26 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  * {
+}
+
+* {
     box-sizing: border-box;
-  }
-  
-  /* style the container */
-  .container {
+}
+
+
+/* style the container */
+
+.container {
     position: relative;
     border-radius: 5px;
     background-color: #f2f2f2;
     padding: 20px 0 30px 0;
-  } 
-  
-  /* style inputs and link buttons */
-  input,
-  .btn {
+}
+
+
+/* style inputs and link buttons */
+
+input,
+.btn {
     width: 100%;
     padding: 12px;
     border: none;
@@ -26,37 +30,43 @@ body {
     display: inline-block;
     font-size: 17px;
     line-height: 20px;
-    text-decoration: none; /* remove underline from anchors */
-  }
-  
-  input:hover,
-  .btn:hover {
+    text-decoration: none;
+    /* remove underline from anchors */
+}
+
+input:hover,
+.btn:hover {
     opacity: 1;
-  }
-  
-  
-  /* style the submit button */
-  input[type=submit] {
+}
+
+
+/* style the submit button */
+
+input[id="btn2"] {
+    background-color: #e5ff00;
+    color: white;
+    cursor: pointer;
+}
+
+input[id="btn2"]:hover {
+    background-color: #738d00;
+}
+
+input[id="btn"] {
     background-color: #04AA6D;
     color: white;
     cursor: pointer;
-  }
-  
-  input[type=submit]:hover {
+}
+
+input[id="btn"]:hover {
     background-color: #45a049;
-  }
-  
- 
-  
-  /* hide some text on medium and large screens */
-  .hide-md-lg {
-    display: none;
-  }
-  
-  /* bottom container */
-  .bottom-container {
+}
+
+
+/* bottom container */
+
+.bottom-container {
     text-align: center;
     background-color: #666;
     border-radius: 0px 0px 4px 4px;
-  }
-  
+}
