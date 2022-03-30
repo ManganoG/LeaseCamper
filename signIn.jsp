@@ -32,7 +32,7 @@
             username = request.getParameter("username");
             password = request.getParameter("password");
             
-            connection = DriverManager.getConnection("jdbc:ucanaccess://" + request.getServletContext().getRealPath("/") + "Accedi.accdb");
+            connection = DriverManager.getConnection("jdbc:ucanaccess://" + request.getServletContext().getRealPath("/") + "LeaseCamper.accdb");
             String verifica = "SELECT Username from Utenti WHERE Username = '"+username+"';";
             Statement st = connection.createStatement();          
             ResultSet result = st.executeQuery(verifica);
@@ -47,14 +47,6 @@
         }
         catch(Exception e){
             out.println(e);
-        }
-        finally{
-            if(connection != null){
-                try{
-                    connection.close();
-                }
-                catch(Exception e){out.println("Errore nella chiusura della connessione");}
-            }
         }
         %>
         <a href="index.html">

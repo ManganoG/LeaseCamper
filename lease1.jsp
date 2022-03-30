@@ -6,7 +6,7 @@
         <%@ page import="java.io.*" %>
         <%@ page import="java.sql.*" %>
         <%
-            response.getOutputStream().println("<h1>Camper disponibili</h1>");
+            response.getOutputStream().println("<h1>Prenotazione</h1>");
 
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -40,7 +40,7 @@
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(1)+"</td>");
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(2).substring(0,10)+"</td>");
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(4)+"</td>");
-                        response.getOutputStream().println("<td style=\"border: 1px solid black;\"><a href=\"lease1.html\"><input type=\"submit\" value=\"Prenota\"></a></td></tr>");                    
+                        response.getOutputStream().println("<td style=\"border: 1px solid black;\"><a href=\"lease1.jsp\"><input type=\"submit\" value=\"Prenota\"></a></td></tr>");                    
                         }
                         response.getOutputStream().println("</table><br>");
                     if(id==null){

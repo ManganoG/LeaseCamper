@@ -1,0 +1,21 @@
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <div style="text-align:center">
+        <form action="rent.jsp" method="post">
+            <div class="row">
+                <h2 style="text-align:center">Aggiungi un Camper</h2>
+                pattern="[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}"<br>
+                <input type="text" name="targa" placeholder="Targa" pattern="[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}" maxlength="7" required><br><br>
+                <input type="text" name="desc" placeholder="Descrizione" style="height:100px" size="100" maxlength="255" required><br><br>
+                <input type="submit" id="btn" value="Add">
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

@@ -14,28 +14,25 @@
                     System.out.println("Errore: Impossibile caricare il Driver Ucanaccess1");
                 }
                 try {
-                    Connection connection = DriverManager.getConnection("jdbc:ucanaccess://" + request.getServletContext().getRealPath("/") + "Accedi.accdb");
+                    Connection connection = DriverManager.getConnection("jdbc:ucanaccess://" + request.getServletContext().getRealPath("/") + "LeaseCamper.accdb");
                     String us=request.getParameter("username");
                     String pas=request.getParameter("password");
-                    String query= "SELECT nome FROM Utenti WHERE Username= '" + us + "' AND Password= '"+ pas +"';";
+                    String query= "SELECT Username FROM Utenti WHERE Username= '" + us + "' AND Password= '"+ pas +"';";
                     Statement statement=connection.createStatement();
                     ResultSet resultset=statement.executeQuery(query);
-                    String n=null;
 
                     HttpSession s = request.getSession();
-                    String dataValue = us;
+                    String nome = null;
 
                     while(resultset.next()){
-                        n=resultset.getString(1);
+                        nome=resultset.getString(1);
                     }
-                    if(n==null){
-                        s.setAttribute("username", dataValue);
-                        out.println("");
+                    if(nome==null || ((us == null) && (pas == null))){
                         response.getOutputStream().println("Utente o Password sbagliati <br><br> <a href='signIn.html'> <input type='submit' id='btn2' value='Non hai un account: registrati' /> <br></a>");
                     }
                     else{
-                        s.setAttribute("username", dataValue);
-                        response.getOutputStream().println("Benvenuto "+n);
+                        s.setAttribute("username", nome);
+                        response.sendRedirect("viewCamper.jsp");
                     }
                 }
                 catch (Exception er) {

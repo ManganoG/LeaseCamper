@@ -1,4 +1,4 @@
-1) Autentificazione dell'utente
+1) Autentificazione dell'utente (FATTO)
 end-point /login POST
 input 	user:string
 		pass:string
@@ -7,7 +7,7 @@ output	{"usr":string}
 			status:string{"loggato"};
 			nome_utente:string}
 			
-2) Iscrizione dell'utente
+2) Iscrizione dell'utente (FATTO)
 end-point /singIn POST
 input 	name:string
 		user:string
@@ -30,7 +30,7 @@ output	{
 			risposta:string
 		}
 
-4)inserire un camper sulla piattaforma
+4)inserire un camper sulla piattaforma (FATTO)
 end-point /rent POST
 input	SESSION{nome_utente:string,user:string}
 		nome_camper:string
@@ -40,7 +40,7 @@ output	{
 			propriatario:string
 		}
 
-5)Mostra i tuoi noleggi
+5)Mostra i tuoi noleggi 
 
 end-point /viewLease POST
 input	SESSION{nome_utente:string,user:string}
@@ -50,7 +50,7 @@ output	{
 		}
 		
 
-5)Mostra i tuoi camper
+5)Mostra i tuoi camper (FATTO)
 
 end-point /viewRent POST
 input	SESSION{nome_utente:string,user:string}
@@ -60,7 +60,7 @@ output	{
 		}
 		
 		
-6)Mostra tutti i camper
+6)Mostra tutti i camper (FATTO)
 
 end-point /viewCamper POST
 
@@ -76,3 +76,11 @@ input
 output	{
 			{nome_noleggiatore:string;{nome_camper:string;targa:string;stato:string}}
 		}
+
+8)Logout (FATTO)
+end-point /logout POST
+
+input
+output	SESSION {
+			status:string{"non loggato"};
+			nome_utente:null}
