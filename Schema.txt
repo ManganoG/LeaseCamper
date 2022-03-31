@@ -87,3 +87,5 @@ output	SESSION {
 
 9)Eliminazione prenotazione (FATTO)
 	end-point /delLease POST
+
+10)Ricerca camper
