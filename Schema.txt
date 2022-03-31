@@ -40,7 +40,7 @@ output	{
 			propriatario:string
 		}
 
-5)Mostra i tuoi noleggi 
+5)Mostra i tuoi noleggi (FATTO)
 
 end-point /viewLease POST
 input	SESSION{nome_utente:string,user:string}
@@ -85,5 +85,5 @@ output	SESSION {
 			status:string{"non loggato"};
 			nome_utente:null}
 
-9)Eliminazione prenotazione
+9)Eliminazione prenotazione (FATTO)
 	end-point /delLease POST
