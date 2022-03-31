@@ -19,7 +19,7 @@ output	{"usr":string}
 			nome_utente:string}
 
 
-3)richiesta di noleggiare un camper
+3)richiesta di noleggiare un camper (FATTO)
 end-point /lease POST
 input	SESSION{nome_utente:string,user:string}
 		metodo di pagamento:string
@@ -84,3 +84,6 @@ input
 output	SESSION {
 			status:string{"non loggato"};
 			nome_utente:null}
+
+9)Eliminazione prenotazione
+	end-point /delLease POST

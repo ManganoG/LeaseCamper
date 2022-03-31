@@ -1,1 +1,19 @@
-ciao
+<html>
+
+<head>
+</head>
+
+<body>
+
+    <a href="logout.jsp"><input type="submit" value="Logout"> <br></a>
+    <a href="viewRent.jsp"><input type="submit" value="Mostra i tuoi camper"> <br></a>
+    <a href="viewCamper.jsp"><input type="submit" value="Mostra tutti i camper" /> <br></a>
+    <a href="rent.html"><input type="submit" value="Aggiungi un camper"> <br><br></a>
+    <br>
+    <form action='lease1.jsp?targa="+resultset.getString(5)"' method=' post'>
+        Data inizio: <input type='date' name='DataInizio'> <br> Data fine: <input type='date' name='DataFine'>
+        <input type="submit" value="Prenota">
+    </form>
+</body>
+
+</html>

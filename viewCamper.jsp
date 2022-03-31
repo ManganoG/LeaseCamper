@@ -26,6 +26,7 @@
                 if(nome!=null){
                     response.getOutputStream().println("<a href=\"logout.jsp\"><input type=\"submit\" value=\"Logout\"> <br></a>");
                     response.getOutputStream().println("<a href=\"viewRent.jsp\"><input type=\"submit\" value=\"Mostra i tuoi camper\"> <br></a>");
+                    response.getOutputStream().println("<a href=\"viewLease.jsp\"><input type=\"submit\" value=\"Mostra i tuoi noleggi\"><br></a>");
                     response.getOutputStream().println("<a href=\"rent.html\"><input type=\"submit\" value=\"Aggiungi un camper\"> <br><br></a>");
                     response.getOutputStream().println("<table style=\"border: 1px solid black;\">");
                     response.getOutputStream().println("<tr>");
@@ -40,7 +41,8 @@
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(1)+"</td>");
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(2).substring(0,10)+"</td>");
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(4)+"</td>");
-                        response.getOutputStream().println("<td style=\"border: 1px solid black;\"><a href=\"lease1.html\"><input type=\"submit\" value=\"Prenota\"></a></td></tr>");                    
+                        response.getOutputStream().println("<td style=\"border: 1px solid black;\"><a href='lease1.jsp?targa="+resultset.getString(5)+"'><input type=\"submit\" value=\"Prenota\"></a></td></tr>"); 
+                                       
                         }
                         response.getOutputStream().println("</table><br>");
                     if(id==null){
