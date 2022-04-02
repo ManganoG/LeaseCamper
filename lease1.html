@@ -11,7 +11,8 @@
     <a href="rent.html"><input type="submit" value="Aggiungi un camper"> <br><br></a>
     <br>
     <form action='lease1.jsp?targa="+resultset.getString(5)"' method=' post'>
-        Data inizio: <input type='date' name='DataInizio'> <br> Data fine: <input type='date' name='DataFine'>
+        Data inizio: <input type='date' name='DataInizio' required> <br> 
+        Data fine: <input type='date' name='DataFine' required>
         <input type="submit" value="Prenota">
     </form>
 </body>
