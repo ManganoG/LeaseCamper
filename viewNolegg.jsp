@@ -18,7 +18,7 @@
                 HttpSession s = request.getSession();
                 String nome = (String) s.getAttribute("username");
 
-                String query= "SELECT DISTINCT Username,Nome,Cognome,Telefono FROM Utenti,Camper WHERE Username=Proprietario;";
+                String query= "SELECT DISTINCT Username,Nome,Cognome,Telefono FROM Utenti,Camper WHERE Username=Proprietario AND Proprietario!='"+nome+"';";
                 Statement statement=connection.createStatement();
                 ResultSet resultset=statement.executeQuery(query);
                 String id=null;
