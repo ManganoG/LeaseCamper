@@ -22,12 +22,10 @@ output	{"usr":string}
 3)richiesta di noleggiare un camper (FATTO)
 end-point /lease POST
 input	SESSION{nome_utente:string,user:string}
-		metodo di pagamento:string
-		nome_camper:string
 		targa:string
 output	{
-			propriatario:string
-			risposta:string
+			targa:string
+			risposta:string("Prenotazione effettuata")
 		}
 
 4)inserire un camper sulla piattaforma (FATTO)
@@ -37,7 +35,7 @@ input	SESSION{nome_utente:string,user:string}
 		targa:string
 		descrizione:string
 output	{
-			propriatario:string
+			proprietario:string
 		}
 
 5)Mostra i tuoi noleggi (FATTO)
@@ -56,7 +54,7 @@ end-point /viewRent POST
 input	SESSION{nome_utente:string,user:string}
 		
 output	{
-			{nome_camper:string;targa:string;stato:string}
+			{targa:string;stato:string;descrizione:string;dataInserimento:string}
 		}
 		
 		
@@ -66,15 +64,15 @@ end-point /viewCamper POST
 
 input
 output	{
-			{nome_camper:string;targa:string;stato:string;propriatario:string}
+			{targa:string;stato:string;descrizione:string;dataInserimento:string}
 		}
 
-7)Mosta tutti i noleggiatori
+7)Mosta tutti i noleggiatori (FATTO)
 end-point /viewNolegg POST
 
 input
 output	{
-			{nome_noleggiatore:string;{nome_camper:string;targa:string;stato:string}}
+			{nome_noleggiatore:string;{{targa:string;stato:string;descrizione:string;dataInserimento:string}}}
 		}
 
 8)Logout (FATTO)
@@ -87,5 +85,16 @@ output	SESSION {
 
 9)Eliminazione prenotazione (FATTO)
 	end-point /delLease POST
+	input	SESSION{nome_utente:string,user:string}
+		targa:string
+output	{
+			risposta:string("eliminazione effettuata")
+		}
 
-10)Ricerca camper
+10)Camper dei noleggiatori (FATTO)
+	end-point /viewCamperN POST
+	input	SESSION{nome_utente:string,user:string}
+		Proprietario:String
+	output	{
+			{Proprietario:string;{targa:string;descrizione:string;stato:string;dataInserimento:String}}
+		}

@@ -33,13 +33,15 @@
                     response.getOutputStream().println("<th style=\"border: 1px solid black;\">Username</th>");
                     response.getOutputStream().println("<th style=\"border: 1px solid black;\">Nome</th>");
                     response.getOutputStream().println("<th style=\"border: 1px solid black;\">Cognome</th>");
-                    response.getOutputStream().println("<th style=\"border: 1px solid black;\">Telefono</th></tr>");
+                    response.getOutputStream().println("<th style=\"border: 1px solid black;\">Telefono</th>");
+                    response.getOutputStream().println("<th style=\"border: 1px solid black;\"></th></tr>");
                     while(resultset.next()){
                         id=resultset.getString(1);
                         response.getOutputStream().println("<tr><td style=\"border: 1px solid black;\">"+resultset.getString(1)+"</td>");
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(2)+"</td>");
                         response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(3)+"</td>");
-                        response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(4)+"</td></tr>"); 
+                        response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(4)+"</td>");
+                        response.getOutputStream().println("<td style=\"border: 1px solid black;\"><a href='viewCamperN.jsp?p="+resultset.getString(1)+"'><input type=\"submit\" value=\"Vedi camper\"></a></td></tr>");  
                                        
                         }
                         response.getOutputStream().println("</table><br>");
