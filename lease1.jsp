@@ -37,8 +37,8 @@
                     response.getOutputStream().println("<a href=\"viewNolegg.jsp\"><input type=\"submit\" value=\"Mostra i noleggiattori\"><br></a>");
                     response.getOutputStream().println("<a href=\"rent.html\"><input type=\"submit\" value=\"Aggiungi un camper\"> <br><br></a>");
                     response.getOutputStream().println("<br><form action = 'lease2.jsp' method = ' post' >");
-                    response.getOutputStream().println("Data inizio: <input type = 'date' name = 'DataInizio' >");
-                    response.getOutputStream().println("Data fine: <input type = 'date' name = 'DataFine' >");
+                    response.getOutputStream().println("Data inizio: <input type = 'date' name = 'DataInizio' required>");
+                    response.getOutputStream().println("Data fine: <input type = 'date' name = 'DataFine' required>");
                     response.getOutputStream().println("<input type=\"submit\" value=\"Prenota\">");
                     response.getOutputStream().println("</form>");
                 }
