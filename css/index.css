@@ -43,7 +43,7 @@ input:hover,
 /* style the submit button */
 
 input[id="btn2"] {
-    background-color: #e5ff00;
+    background-color: #2f00ff;
     color: white;
     cursor: pointer;
 }
