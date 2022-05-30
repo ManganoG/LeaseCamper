@@ -62,7 +62,7 @@ output	{
 
 end-point /viewCamper POST
 
-input
+input SESSION{nome_utente:string,user:string}
 output	{
 			{targa:string;stato:string;descrizione:string;dataInserimento:string}
 		}
@@ -70,7 +70,7 @@ output	{
 7)Mosta tutti i noleggiatori (FATTO)
 end-point /viewNolegg POST
 
-input
+input SESSION{nome_utente:string,user:string}
 output	{
 			{nome_noleggiatore:string;{{targa:string;stato:string;descrizione:string;dataInserimento:string}}}
 		}
@@ -91,10 +91,17 @@ output	{
 			risposta:string("eliminazione effettuata")
 		}
 
-10)Camper dei noleggiatori (FATTO)
-	end-point /viewCamperN POST
+10)Eliminazione camper (FATTO)
+	end-point /delCamper POST
 	input	SESSION{nome_utente:string,user:string}
-		Proprietario:String
+		targa:string
+output	{
+			risposta:string("eliminazione effettuata")
+		}
+
+11)Camper dei noleggiatori (FATTO)
+	end-point /viewCamperN POST
+	input	SESSION{nome_utente:string,user:string},Proprietario:String
 	output	{
 			{Proprietario:string;{targa:string;descrizione:string;stato:string;dataInserimento:String}}
 		}

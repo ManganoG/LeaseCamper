@@ -66,7 +66,7 @@ h1{
     </style>
     </head>
     <body>
-     <h1 style="color: white;">Ciao: questo &egrave un easter egg</h1>
+     <h1>I tuoi camper</h1>
         
         <%
             try {
@@ -81,9 +81,6 @@ h1{
                 ResultSet rs;
                 String nome = (String) s.getAttribute("username");
                 String t = request.getParameter("targa");
-                String p=request.getParameter("p");
-                String DtIn=request.getParameter("di");
-                String DtFn=request.getParameter("df");
                 String query1=null;
                 String query2=null;
 
@@ -102,17 +99,15 @@ h1{
         </div>
                     <%
                     
-                    String verifica = "SELECT * from Noleggi WHERE Targa = '"+t+"' AND Proprietario='"+p+"' AND Affittuario='"+nome+"' AND DataInizio=#"+DtIn+"# AND DataFine=#"+DtFn+"#;";
+                    String verifica = "SELECT * from Camper WHERE Targa = '"+t+"' AND Proprietario='"+nome+"';";
                     st = connection.createStatement();          
                     rs = st.executeQuery(verifica);
                     if(rs.next()){
-                        query1 = "DELETE FROM Noleggi WHERE Targa = '"+t+"' AND Proprietario='"+p+"' AND Affittuario='"+nome+"' AND DataInizio=#"+DtIn+"# AND DataFine=#"+DtFn+"#;";
+                        query1 = "DELETE FROM Camper WHERE Targa = '"+t+"' AND Proprietario='"+nome+"';";
                         st.executeUpdate(query1);
-                        out.println("<h1 style='color:red;'><b>Cancellazione eseguita correttamente</b> </h1>");
-                        query2 = "UPDATE Camper SET Disponibilita='true' WHERE Targa = '"+t+"'";
-                        st.executeUpdate(query2);
+                        out.println("<h1 style='color:red;'><b>Camper cancellato correttamente</b> </h1>");
                     }else{
-                        out.println("<h1 style='color:red;'><b> Questa prenotazione non esiste</b> </h1>");
+                        out.println("<h1 style='color:red;'><b> Questo camper non esiste</b> </h1>");
                     }
 
                 }

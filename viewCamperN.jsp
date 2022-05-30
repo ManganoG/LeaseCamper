@@ -1,13 +1,138 @@
-
+<%@ page import="java.io.*" %>
+<%@ page import="java.sql.*" %>
 <html>
     <head>
+    <style>
+    table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 3px solid black;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:hover{
+	background: linear-gradient(to right, #00ccff 0%, #66ff33 100%);
+}
+input[name="B"]{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+}
+
+/*-----------------------*/
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+    bottom:50px;
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #2decd6;}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #8a1e1e;
+}
+
+.dropdown-content a.Log:hover {
+    background-color: #ff0000;
+}
+
+/*---------------*/
+
+@import url('https://fonts.googleapis.com/css?family=Montserrat:600&display=swap');
+
+span{
+  position: relative;
+  display: inline-flex;
+  width: 100px;
+  height: 25px;
+  margin: 0 15px;
+  perspective: 5000px;
+}
+span a{
+  font-size: 15px;
+  letter-spacing: 1px;
+  transform-style: preserve-3d;
+  transform: translateZ(-25px);
+  transition: transform .25s;
+  font-family: 'Montserrat', sans-serif;
+  
+}
+span a:before,
+span a:after{
+  position: absolute;
+  content: "Noleggia";
+  height: 25px;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid black;
+  box-sizing: border-box;
+  border-radius: 5px;
+}
+span a:before{
+  color: #fff;
+  background: #000;
+  transform: rotateY(0deg) translateZ(25px);
+}
+span a:after{
+  color: #000;
+  transform: rotateX(90deg) translateZ(25px);
+}
+span a:hover{
+  transform: translateZ(-25px) rotateX(-90deg);
+}
+/*----------------------------*/
+h1{
+    text-align:center;
+}
+
+
+    </style>
     </head>
     <body>
-        <%@ page import="java.io.*" %>
-        <%@ page import="java.sql.*" %>
+        
         <%
             String p = request.getParameter("p");
-            response.getOutputStream().println("<h1>Camper di "+p+"</h1>");
+            out.println("<h1>Camper di "+p+"</h1>");
 
             try {
                 Class.forName("net.ucanaccess.jdbc.UcanaccessDriver");
@@ -25,42 +150,51 @@
                 String id=null;
                 
                 if(nome!=null){
-                    response.getOutputStream().println("<a href=\"logout.jsp\"><input type=\"submit\" value=\"Logout\"> <br></a>");
-                    response.getOutputStream().println("<a href=\"viewRent.jsp\"><input type=\"submit\" value=\"Mostra i tuoi camper\"> <br></a>");
-                    response.getOutputStream().println("<a href=\"viewLease.jsp\"><input type=\"submit\" value=\"Mostra i tuoi noleggi\"><br></a>");
-                    response.getOutputStream().println("<a href=\"viewCamper.jsp\"><input type=\"submit\" value=\"Mostra tutti i camper\" /> <br></a>");
-                    response.getOutputStream().println("<a href=\"viewNolegg.jsp\"><input type=\"submit\" value=\"Mostra i noleggiattori\"><br></a>");
-                    response.getOutputStream().println("<a href=\"rent.html\"><input type=\"submit\" value=\"Aggiungi un camper\"> <br><br></a>");
-                    response.getOutputStream().println("<table style=\"border: 1px solid black;\">");
-                    response.getOutputStream().println("<tr>");
-                    response.getOutputStream().println("<th style=\"border: 1px solid black;\">Targa</th>");
-                    response.getOutputStream().println("<th style=\"border: 1px solid black;\">Descrizione</th>");
-                    response.getOutputStream().println("<th style=\"border: 1px solid black;\">Data inserimento</th>");
-                    response.getOutputStream().println("<th style=\"border: 1px solid black;\">Disponibile</th>");
-                    response.getOutputStream().println("<th style=\"border: 1px solid black;\"></th></tr>");
+        %>
+        <div class="dropdown" style="float:right;">
+            <button class="dropbtn">Men&#250;</button>
+            <div class="dropdown-content">
+                <a href="viewRent.jsp"><input type="submit" value="Mostra i tuoi camper" name="B"></a>
+                <a href="viewLease.jsp"><input type="submit" value="Mostra i tuoi noleggi" name="B"></a>
+                <a href="viewNolegg.jsp"><input type="submit" value="Mostra i noleggiattori" name="B"></a>
+                <a href="viewCamper.jsp"><input type="submit" value="Mostra tutti i camper" name="B"></a>
+                <a href="rent.html"><input type="submit" value="Aggiungi un camper" name="B"></a>
+                <a class="Log" href="logout.jsp"><input type="submit" value="Logout" name="B"></a>
+            </div>
+        </div>
+
+            <table>
+            <tr style="background: linear-gradient(to right, #ff0000 0%, #ffff00 100%);">
+            <th>Targa</th>
+            <th>Descrizione</th>
+            <th>Data inserimento</th>
+            <th>Disponibile</th>
+            <th></th></tr>
+    </body>
+    <%
                     while(resultset.next()){
                         id=resultset.getString(1);
-                        response.getOutputStream().println("<tr><td style=\"border: 1px solid black;\">"+resultset.getString(5)+"</td>");
-                        response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(1)+"</td>");
-                        response.getOutputStream().println("<td style=\"border: 1px solid black;\">"+resultset.getString(2).substring(0,10)+"</td>");
+                        out.println("<tr><td>"+resultset.getString(5)+"</td>");
+                        out.println("<td>"+resultset.getString(1)+"</td>");
+                        out.println("<td>"+resultset.getString(2).substring(0,10)+"</td>");
                         if(resultset.getString(3).equals("TRUE")){
-                            response.getOutputStream().println("<td style=\"border: 1px solid black;\">Si'</td>");
+                            out.println("<td>Si'</td>");
                         }
                         else{
-                            response.getOutputStream().println("<td style=\"border: 1px solid black;\">No</td>");
+                            out.println("<td>No</td>");
                         }
                         if(resultset.getString(3).equals("TRUE")){
-                            response.getOutputStream().println("<td style=\"border: 1px solid black;\"><a href='lease1.jsp?targa="+resultset.getString(5)+"'><input type=\"submit\" value=\"Prenota\"></a></td></tr>");
+                            out.println("<td><span><a href='lease1.jsp?targa="+resultset.getString(5)+"'><input type=\"submit\" value=\"       \" name=\"B\"></a><span></td></tr>");
                         }
                                        
                     }
-                    response.getOutputStream().println("</table><br>");
+                    out.println("</table><br>");
                     if(id==null){
-                        response.getOutputStream().println("Errore nel database,conttatare l'assistenza");
+                        out.println("<h1 style='color:red;'><b>Questo utente non noleggia alcun camper</b> </h1>");
                     }
                 }
                 else{
-                    response.getOutputStream().println("<a href=\"index.html\"><input type=\"submit\" value=\"Non ti sei ancora loggato\" /> <br></a>");
+                    response.sendRedirect("index.html");
 
                 }
             }

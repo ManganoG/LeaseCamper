@@ -1,25 +1,173 @@
 <html>
 
 <head>
+    <style>
+        input[name="B"] {
+            background-color: Transparent;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        /*-----------------------*/
+        
+        .dropbtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .dropdown {
+            bottom: 50px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        
+        .dropdown-content a:hover {
+            background-color: #2decd6;
+        }
+        
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+        
+        .dropdown:hover .dropbtn {
+            background-color: #8a1e1e;
+        }
+        
+        .dropdown-content a.Log:hover {
+            background-color: #ff0000;
+        }
+        /*----------------------------*/
+        
+        h1 {
+            text-align: center;
+        }
+        /*--------*/
+        
+        #container1 {
+            width: 500px;
+            height: 450px;
+            position: absolute;
+            top: 55%;
+            left: 45%;
+            margin: -250px 0 0 -175px;
+            border: 5px solid black;
+            padding: 12px;
+            background: rgb(250, 164, 26);
+            background: linear-gradient(90deg, rgba(250, 164, 26, 1) 0%, rgba(37, 255, 69, 1) 51%, rgba(30, 195, 228, 1) 100%);
+        }
+        
+        #container2 {
+            width: 500px;
+            height: 450px;
+            position: absolute;
+            top: 60%;
+            left: 40%;
+            margin: -250px 0 0 -175px;
+            border: 5px solid black;
+            padding: 12px;
+            background: white;
+        }
+        /*-------------------*/
+        /*common button css  */
+        
+        input.hover-center {
+            border: 1px solid black;
+            background-color: transparent;
+            color: black;
+            padding: 10px 40px;
+            font-size: 20px;
+            font-weight: 500;
+            border-radius: 3px;
+        }
+        /* hover-center 1 css */
+        
+        input.hover-center {
+            background-image: linear-gradient(90deg, rgba(45, 193, 121, 1) 0%, rgba(11, 1, 75, 1) 100%);
+            background-size: 0;
+            transition: .8s;
+            background-repeat: no-repeat;
+            background-position: bottom;
+            transition-timing-function: cubic-bezier(0.52, 1.64, 0.37, 0.66);
+        }
+        
+        input.hover-center:hover {
+            background-size: 100%;
+            color: #fff;
+        }
+        /*------------------*/
+        
+        input[id="targa"] {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 4px solid green;
+        }
+        
+        input[id="desc"] {
+            width: 100%;
+            height: 100px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            box-sizing: border-box;
+            border: 4px solid red;
+            border-top: none;
+        }
+    </style>
 </head>
 
 <body>
-
+    <h1 style="color: white;">Ciao: questo &egrave un easter egg</h1>
     <div style="text-align:center">
-        <form action="rent.jsp" method="post">
-            <div class="row">
-                <h2 style="text-align:center">Aggiungi un Camper</h2>
-                pattern="[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}"<br>
-                <input type="text" name="targa" placeholder="Targa" pattern="[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}" maxlength="7" required><br><br>
-                <input type="text" name="desc" placeholder="Descrizione" style="height:100px" size="100" maxlength="255" required><br><br>
-                <input type="submit" id="btn" value="Add">
+        <div class="dropdown" style="float:right;">
+            <button class="dropbtn">Men&#250;</button>
+            <div class="dropdown-content">
+                <a href="viewCamper.jsp"><input type="submit" value="Mostra tutti i camper" name="B"></a>
+                <a href="viewLease.jsp"><input type="submit" value="Mostra i tuoi noleggi" name="B"></a>
+                <a href="viewNolegg.jsp"><input type="submit" value="Mostra i noleggiattori" name="B"></a>
+                <a href="viewRent.jsp"><input type="submit" value="Mostra i tuoi camper" name="B"></a>
+                <a class="Log" href="logout.jsp"><input type="submit" value="Logout" name="B"></a>
             </div>
-        </form>
-        <a href="logout.jsp"><input type="submit" value="Logout"></a>
-        <a href="viewRent.jsp"><input type="submit" value="Mostra i tuoi camper"></a>
-        <a href="viewCamper.jsp"><input type="submit" value="Mostra tutti i camper" /></a>
-        <a href="viewLease.jsp"><input type="submit" value="Mostra i tuoi noleggi"></a>
-        <a href="viewNolegg.jsp"><input type="submit" value="Mostra i noleggiattori"><br></a>
+        </div>
+        <div id="container1">
+            <div id="container2">
+                <form action="rent.jsp" method="post">
+                    <h1>Aggiungi un Camper</h1>
+                    <label for="targa">Targa:[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}</label>
+                    <input type="text" id="targa" name="targa" pattern="[a-zA-Z]{2}[0-9]{3}[a-zA-Z]{2}" maxlength="7" required>
+                    <br><br>
+                    <label for="desc">Descrizione</label>
+                    <input type="text" name="desc" id="desc" size="60px" maxlength="255" required><br><br>
+                    <br><br>
+                    <input type="submit" value="Add" class="hover-center">
+                </form>
+            </div>
+        </div>
+
+
     </div>
 </body>
 
