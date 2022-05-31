@@ -1,5 +1,8 @@
 <%@ page import="java.io.*" %>
-        <%@ page import="java.sql.*" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.sql.Date" %>
+<%@ page import="java.text.*" %>
+<%@ page import="java.util.*" %>
 <html>
     <head>
     <style>
@@ -84,6 +87,14 @@ h1{
                 String p=request.getParameter("p");
                 String DtIn=request.getParameter("di");
                 String DtFn=request.getParameter("df");
+                String DRest;
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                long miliseconds = System.currentTimeMillis();
+		        Date d = new Date(miliseconds);        
+		        DRest = dateFormat.format(d);
+
+                
                 String query1=null;
                 String query2=null;
 
@@ -106,9 +117,9 @@ h1{
                     st = connection.createStatement();          
                     rs = st.executeQuery(verifica);
                     if(rs.next()){
-                        query1 = "DELETE FROM Noleggi WHERE Targa = '"+t+"' AND Proprietario='"+p+"' AND Affittuario='"+nome+"' AND DataInizio=#"+DtIn+"# AND DataFine=#"+DtFn+"#;";
+                        query1 = "UPDATE Noleggi SET Restituito='true' , DataRestituzione=#"+DRest+"# WHERE Targa = '"+t+"' AND Proprietario='"+p+"' AND Affittuario='"+nome+"' AND DataInizio=#"+DtIn+"# AND DataFine=#"+DtFn+"#;";
                         st.executeUpdate(query1);
-                        out.println("<h1 style='color:red;'><b>Cancellazione eseguita correttamente</b> </h1>");
+                        out.println("<h1 style='color:red;'><b>Terminazione eseguita correttamente</b> </h1>");
                         query2 = "UPDATE Camper SET Disponibilita='true' WHERE Targa = '"+t+"'";
                         st.executeUpdate(query2);
                     }else{

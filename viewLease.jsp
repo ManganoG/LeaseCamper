@@ -132,7 +132,25 @@ h1{
     <body>
 
     <h1>I Tuoi Noleggi</h1>
-        
+        <div class="dropdown" style="float:right;">
+           <button class="dropbtn">Men&#250;</button>
+            <div class="dropdown-content">
+                <a href="viewCamper.jsp"><input type="submit" value="Mostra tutti i camper" name="B"></a>
+                <a href="viewRent.jsp"><input type="submit" value="Mostra i tuoi camper" name="B"></a>
+                <a href="viewNolegg.jsp"><input type="submit" value="Mostra i noleggiattori" name="B"></a>
+                <a href="rent.html"><input type="submit" value="Aggiungi un camper" name="B"></a>
+                <a class="Log" href="logout.jsp"><input type="submit" value="Logout" name="B"></a>
+            </div>
+        </div>
+
+        <form action = "viewLease.jsp" method = " post" >
+        <select name="Opz" >
+          <option value="tutti" selected="selected">Tutti</option>
+          <option value="term">Terminati</option>
+          <option value="iCor">In corso</option>
+          <input type="submit" value="Invia">
+        </select>
+        </form>
         <%
             
 
@@ -145,24 +163,23 @@ h1{
                 Connection connection = DriverManager.getConnection("jdbc:ucanaccess://" + request.getServletContext().getRealPath("/") + "LeaseCamper.accdb");
                 HttpSession s = request.getSession();
                 String nome = (String) s.getAttribute("username");
-
-                String query= "SELECT * FROM Noleggi WHERE Affittuario='"+nome+"';";
+                String query;
+                String tipo = request.getParameter("Opz");
+                if(tipo.equals("tutti")){
+                  query= "SELECT * FROM Noleggi WHERE Affittuario='"+nome+"';";
+                }
+                else if(tipo.equals("term")){
+                  query= "SELECT * FROM Noleggi WHERE Affittuario='"+nome+"' AND Restituito=true;";
+                }
+                else{
+                  query= "SELECT * FROM Noleggi WHERE Affittuario='"+nome+"' AND Restituito=false;";
+                }
                 Statement statement=connection.createStatement();
                 ResultSet resultset=statement.executeQuery(query);
                 String id=null;
                 
                 if(nome!=null){
         %>
-        <div class="dropdown" style="float:right;">
-           <button class="dropbtn">Men&#250;</button>
-            <div class="dropdown-content">
-                <a href="viewCamper.jsp"><input type="submit" value="Mostra tutti i camper" name="B"></a>
-                <a href="viewRent.jsp"><input type="submit" value="Mostra i tuoi camper" name="B"></a>
-                <a href="viewNolegg.jsp"><input type="submit" value="Mostra i noleggiattori" name="B"></a>
-                <a href="rent.html"><input type="submit" value="Aggiungi un camper" name="B"></a>
-                <a class="Log" href="logout.jsp"><input type="submit" value="Logout" name="B"></a>
-            </div>
-        </div>
 
         <table>
             <tr style="background: linear-gradient(to right, #ff0000 0%, #ffff00 100%);">
@@ -170,22 +187,60 @@ h1{
             <th>Proprietario</th>
             <th>Data Inizio</th>
             <th>Data Fine</th>
-            <th></th></tr>
-    </body>
+            <% if(tipo.equals("tutti")){
+                  out.println("<th>Restituito</th>");
+                  out.println("<th>Data restituzione</th>");
+                  out.println("<th></th>");
+                }
+                else if(tipo.equals("term")){
+                  out.println("<th>Restituito</th>");
+                  out.println("<th>Data restituzione</th>");
+                }
+                else{
+                  out.println("<th></th>");
+                }  %>
+            </tr>
     <%    
                 
                     while(resultset.next()){
-                        id=resultset.getString(1);
+                        id=resultset.getString(3);
                         out.println("<tr><td>"+resultset.getString(3)+"</td>");
                         out.println("<td>"+resultset.getString(1)+"</td>");
                         out.println("<td>"+resultset.getString(4).substring(0,10)+"</td>");
                         out.println("<td>"+resultset.getString(5).substring(0,10)+"</td>");
-                        out.println("<td><span><a href='delLease.jsp?targa="+resultset.getString(3)+"&p="+resultset.getString(1)+"&di="+(resultset.getString(4).substring(0,10))+"&df="+(resultset.getString(5).substring(0,10))+"'><input type=\"submit\" value=\"       \" name=\"B\"></a><span></td></tr>");                                        
+                        if(tipo.equals("tutti")){
+                            if(resultset.getString(6).equals("TRUE")){
+                                out.println("<td>Si'</td>");
+                            }
+                            else{
+                                out.println("<td>No</td>");
+                            }
+                            if(resultset.getString(7)==null){
+                              out.println("<td>-------</td>");
+                            }
+                            else{
+                              out.println("<td>"+resultset.getString(7).substring(0,10)+"</td>");
+                            }
+                          
+                        }
+                        else if(tipo.equals("term")){
+                            if(resultset.getString(6).equals("TRUE")){
+                              out.println("<td>Si'</td>");
+                            }
+                            else{
+                              out.println("<td>No</td>");
+                            }
+                            out.println("<td>"+resultset.getString(7).substring(0,10)+"</td>");
+                        }
+                        if(resultset.getString(6).equals("FALSE")){
+                            out.println("<td><span><a href='delLease.jsp?targa="+resultset.getString(3)+"&p="+resultset.getString(1)+"&di="+(resultset.getString(4).substring(0,10))+"&df="+(resultset.getString(5).substring(0,10))+"'><input type=\"submit\" value=\"       \" name=\"B\"></a><span></td>");
+                        }  
+                        out.println("</tr>");                                   
                     }
                     out.println("</table><br>");
                     
                     if(id==null){
-                        out.println("<h1 style='color:red;'><b>Nessuna prenotazione effettuata</b> </h1>");
+                        out.println("<h1 style='color:red;'><b>Nessuna prenotazione</b> </h1>");
                     }
                 }
                 else{
